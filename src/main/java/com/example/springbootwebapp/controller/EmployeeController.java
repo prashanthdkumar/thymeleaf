@@ -3,6 +3,7 @@ package com.example.springbootwebapp.controller;
 import com.example.springbootwebapp.entity.Employee;
 import com.example.springbootwebapp.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,4 +49,10 @@ public class EmployeeController {
         return modelAndView;
     }
     
+    @GetMapping("/deleteEmployee")
+    public ModelAndView deleteEmployee(@RequestParam Long employeeId) {
+        ModelAndView modelAndView  = new ModelAndView("add-employee-form");
+        employeeRepository.deleteById(employeeId);
+        return showEmployees();
+    }
 }
