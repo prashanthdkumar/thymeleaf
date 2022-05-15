@@ -34,9 +34,9 @@ public class EmployeeController {
     }
     
     @PostMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute Employee employee) {
+    public ModelAndView saveEmployee(@ModelAttribute Employee employee) {
         employeeRepository.save(employee);
-        return "redirect:/list";
+        return showEmployees();
     }
     
 }
