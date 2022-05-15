@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,6 +38,14 @@ public class EmployeeController {
     public ModelAndView saveEmployee(@ModelAttribute Employee employee) {
         employeeRepository.save(employee);
         return showEmployees();
+    }
+    
+    @GetMapping("/showUpdateForm")
+    public ModelAndView showUpdateForm(@RequestParam Long employeeId) {
+        ModelAndView modelAndView  = new ModelAndView("add-employee-form");
+        Employee employee = employeeRepository.findById(employeeId).orElse(null);
+        modelAndView.addObject("employee", employee);
+        return modelAndView;
     }
     
 }
